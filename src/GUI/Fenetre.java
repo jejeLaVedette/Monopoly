@@ -1,7 +1,9 @@
 package GUI;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -10,9 +12,12 @@ import java.awt.event.MouseListener;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -32,13 +37,21 @@ public class Fenetre extends JFrame implements MouseListener, ActionListener {
 	private JMenuItem onLine;
 	private JMenuItem returnMenu;
 	private JSplitPane split;
+	private JSplitPane splitDees;
 	private Carte carte;
+	private ResizePicture pictureDees;
+	private JLabel text1;
+	private JButton dees;
+	
+	private int espacement = 20;
 
 	/**
 	 * Definition des zones qui separe l ecran
 	 */
 	JPanel zone_gauche = new JPanel();
 	JPanel zone_droite = new JPanel();
+	JPanel zone_textePlayer = new JPanel();
+	JPanel zone_dees = new JPanel();
 
 
 	public Fenetre(){                
@@ -109,10 +122,32 @@ public class Fenetre extends JFrame implements MouseListener, ActionListener {
 		zone_gauche.setLayout(new BorderLayout());
 		zone_droite.setLayout(new BorderLayout());
 		
+		/**
+		 * texte de la partie de droite
+		 */
+		
+		text1 = new JLabel("Au tour du player X");
+		JLabel text2 = new JLabel("Shake dees");
+		dees = new JButton("Shake");
+		dees.setMaximumSize(new Dimension(20,20));
+		
+		zone_textePlayer.add(text1);
+		zone_dees.add(text2);
+		
 		zone_gauche.add(carte);
+		zone_droite.setLayout(new BoxLayout(zone_droite, BoxLayout.PAGE_AXIS));
+		
+		zone_droite.add(zone_textePlayer);
+		Component verticalStrut_1 = Box.createVerticalStrut(espacement);
+		zone_droite.add(verticalStrut_1);
+		Component verticalStrut_2 = Box.createVerticalStrut(espacement);
+		zone_droite.add(zone_dees);
+		zone_droite.add(verticalStrut_2);
+		
+		
 		zone_gauche.setMinimumSize(new Dimension(800,tailleFy));
 		//zone_droite.add(new JButton("test"));
-		zone_droite.setMinimumSize(new Dimension(150,tailleFy));
+		zone_droite.setMinimumSize(new Dimension(182,tailleFy)); //je suppose que la barre qui separe prend 8 pixel... AU PIFFF
 
 
 
@@ -159,8 +194,10 @@ public class Fenetre extends JFrame implements MouseListener, ActionListener {
 			carte = new Carte("libs/monopoly.jpg");
 			zone_gauche.add(carte);
 			this.setVisible(true);
+			
 		} else if(arg0.getSource()==onLine){
 			JOptionPane.showMessageDialog(null, "Fonctionnalitée non implémenté\nDon't be pressed please... <3\n _@/'");
+			
 		} else if(arg0.getSource()==returnMenu){
 			zone_gauche.remove(carte);
 			carte = new Carte("libs/menuIntro.jpg");
