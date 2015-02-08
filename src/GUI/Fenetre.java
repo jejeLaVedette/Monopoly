@@ -52,6 +52,7 @@ public class Fenetre extends JFrame implements MouseListener, ActionListener {
 	JPanel zone_droite = new JPanel();
 	JPanel zone_textePlayer = new JPanel();
 	JPanel zone_dees = new JPanel();
+	JPanel zone_hori_dees = new JPanel();
 
 
 	public Fenetre(){                
@@ -127,23 +128,32 @@ public class Fenetre extends JFrame implements MouseListener, ActionListener {
 		 */
 		
 		text1 = new JLabel("Au tour du player X");
-		JLabel text2 = new JLabel("Shake dees");
+		JLabel text2 = new JLabel("Shake dees : ");
 		dees = new JButton("Shake");
-		dees.setMaximumSize(new Dimension(20,20));
+		dees.setMaximumSize(new Dimension(30,30));
 		
+		zone_textePlayer.setLayout(new BoxLayout(zone_textePlayer, BoxLayout.LINE_AXIS));
 		zone_textePlayer.add(text1);
-		zone_dees.add(text2);
 		
-		zone_gauche.add(carte);
+		zone_dees.add(dees);
+		
+		Component verticalStrut_1 = Box.createVerticalStrut(espacement*2);
+		zone_textePlayer.add(verticalStrut_1);
+		zone_hori_dees.setLayout(new BoxLayout(zone_hori_dees, BoxLayout.LINE_AXIS));
+		zone_hori_dees.add(zone_dees);
+		ResizePicture dee1 = new ResizePicture("libs/dees1.jpg", 30, 30);
+		zone_hori_dees.add(dee1);
+		ResizePicture dee2 = new ResizePicture("libs/dees6.jpg", 30, 30);
+		zone_hori_dees.add(dee2);
+		zone_hori_dees.add(verticalStrut_1);
+		
+
 		zone_droite.setLayout(new BoxLayout(zone_droite, BoxLayout.PAGE_AXIS));
-		
 		zone_droite.add(zone_textePlayer);
-		Component verticalStrut_1 = Box.createVerticalStrut(espacement);
-		zone_droite.add(verticalStrut_1);
-		Component verticalStrut_2 = Box.createVerticalStrut(espacement);
-		zone_droite.add(zone_dees);
-		zone_droite.add(verticalStrut_2);
+		zone_droite.add(zone_hori_dees);
 		
+
+		zone_gauche.add(carte);
 		
 		zone_gauche.setMinimumSize(new Dimension(800,tailleFy));
 		//zone_droite.add(new JButton("test"));
