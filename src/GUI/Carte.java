@@ -1,6 +1,6 @@
 package GUI;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
@@ -22,9 +22,11 @@ public class Carte extends JPanel{
 	}
 	public void paintComponent(Graphics g){
 		try {
-			BufferedImage img = ImageIO.read(new File(linkImage));
+			Image img = ImageIO.read(new File(linkImage));
+			Image img2 = ImageIO.read(new File("libs/dees1.jpg"));
 			//Pour une image de fond
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+			g.drawImage(img2, 680, 725, 40, 40, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -35,4 +35,8 @@ public class ResizePicture extends JPanel{
 		}
 	}
 	
+	public void setLinkImage(String linkImage){
+		this.linkImage=linkImage;
+	}
+	
 }
