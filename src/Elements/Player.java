@@ -1,19 +1,18 @@
 package Elements;
 
 public class Player {
-	
-	private int argentInit;
+
 	private int id;
 	private int argentCourant;
 	private int positionx;
 	private int positiony;
-	
+
+
 	public Player(int id){
-		this.argentInit=1500;
 		this.id=id;
 		this.argentCourant=1500;
-		this.setPositionx(0);
-		this.setPositiony(0);
+		this.setPositionx(680);
+		this.setPositiony(725);
 	}
 
 	public int getArgentCourant() {
